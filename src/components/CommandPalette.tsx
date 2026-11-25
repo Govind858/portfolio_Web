@@ -61,6 +61,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       handler: () => scrollTo('projects'),
     },
     {
+      title: 'Case Study: BookMyCuts Platform (Play Store & K8s)',
+      category: 'Case Studies',
+      icon: Terminal,
+      handler: () => {
+        window.location.hash = '#/project/bookmycuts';
+        onClose();
+      },
+    },
+    {
+      title: 'Case Study: Coffy Byte POS (React Native & BLE Hex)',
+      category: 'Case Studies',
+      icon: Terminal,
+      handler: () => {
+        window.location.hash = '#/project/coffy-byte';
+        onClose();
+      },
+    },
+    {
+      title: 'Case Study: OlaCars Fleet Portal (Enterprise React 19)',
+      category: 'Case Studies',
+      icon: Terminal,
+      handler: () => {
+        window.location.hash = '#/project/olacars-portal';
+        onClose();
+      },
+    },
+    {
       title: 'View BookMyCuts on Google Play Store',
       category: 'Production Apps',
       icon: PlayStoreIcon,

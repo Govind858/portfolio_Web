@@ -29,15 +29,15 @@ export const BentoAbout: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+    <section id="about" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 pb-6 border-b border-white/10">
-        <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-2 mb-2">
-            <Activity className="w-3.5 h-3.5 text-white" />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-14 lg:mb-16 pb-6 border-b border-white/10">
+        <div className="min-w-0">
+          <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-2 mb-2">
+            <Activity className="w-3.5 h-3.5 text-white shrink-0" />
             <span>01 / ABOUT & ENGINEERING PHILOSOPHY</span>
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-white">
+          <h2 className="font-display font-bold text-[clamp(1.35rem,5.5vw,3rem)] uppercase tracking-tight text-white leading-[1.08]">
             Architected for Resilience & Scale.
           </h2>
         </div>
@@ -47,13 +47,13 @@ export const BentoAbout: React.FC = () => {
       </div>
 
       {/* Bento Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
         {/* Card 1: Narrative Manifesto */}
         <motion.div
           whileHover={{ y: -4 }}
           transition={{ duration: 0.3 }}
-          className="md:col-span-2 lg:col-span-2 p-6 sm:p-8 rounded-3xl glass-panel relative overflow-hidden flex flex-col justify-between group"
+          className="md:col-span-2 lg:col-span-2 p-5 sm:p-8 rounded-3xl glass-panel relative overflow-hidden flex flex-col justify-between group min-w-0"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.03] rounded-full blur-3xl pointer-events-none group-hover:bg-white/[0.06] transition-all" />
           
@@ -65,7 +65,7 @@ export const BentoAbout: React.FC = () => {
               </span>
             </div>
 
-            <h3 className="font-display font-bold text-xl sm:text-2xl text-white uppercase leading-snug tracking-wide mb-4">
+            <h3 className="font-display font-bold text-[clamp(1.05rem,4.3vw,1.5rem)] text-white uppercase leading-snug tracking-wide mb-4">
               "A reliable system is one that gracefully survives traffic spikes and hardware buffers."
             </h3>
 
@@ -112,7 +112,7 @@ export const BentoAbout: React.FC = () => {
         <motion.div
           whileHover={{ y: -4 }}
           transition={{ duration: 0.3 }}
-          className="p-6 rounded-3xl glass-panel flex flex-col justify-between relative overflow-hidden"
+          className="p-5 sm:p-6 rounded-3xl glass-panel flex flex-col justify-between relative overflow-hidden min-w-0"
         >
           <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
             <span className="flex items-center gap-1.5">
@@ -151,7 +151,7 @@ export const BentoAbout: React.FC = () => {
           </div>
 
           {/* Terminal Output */}
-          <div className="p-3 rounded-xl bg-black border border-white/5 font-mono text-[11px] leading-relaxed text-zinc-300 min-h-[140px] flex flex-col justify-between select-text">
+          <div className="p-3 rounded-xl bg-black border border-white/5 font-mono text-[11px] leading-relaxed text-zinc-300 min-h-[140px] flex flex-col justify-between select-text overflow-x-auto">
             <div className="space-y-1">
               {consoleLogs[activeConsoleTab].map((line, idx) => (
                 <div
@@ -173,7 +173,7 @@ export const BentoAbout: React.FC = () => {
         <motion.div
           whileHover={{ y: -4 }}
           transition={{ duration: 0.3 }}
-          className="p-6 rounded-3xl glass-panel flex flex-col justify-between"
+          className="p-5 sm:p-6 rounded-3xl glass-panel flex flex-col justify-between min-w-0"
         >
           <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
             <span className="flex items-center gap-1.5">
@@ -203,7 +203,7 @@ export const BentoAbout: React.FC = () => {
         </motion.div>
 
         {/* Card 4: Four Key Engineering Proof Metrics */}
-        <div className="md:col-span-3 lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="md:col-span-2 lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           {[
             { value: '1,024', label: 'Nginx Upstream Worker Connections', icon: Server },
             { value: '2–10', label: 'Kubernetes Autoscaling Pod Range', icon: Cpu },
@@ -235,20 +235,20 @@ export const BentoAbout: React.FC = () => {
         </div>
 
         {/* Card 5: Core Engineering Disciplines */}
-        <div className="md:col-span-3 lg:col-span-4 p-6 sm:p-8 rounded-3xl glass-panel">
+        <div className="md:col-span-2 lg:col-span-4 p-5 sm:p-8 rounded-3xl glass-panel">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
             <div className="flex items-center gap-2">
-              <Database className="w-4 h-4 text-white" />
-              <h3 className="font-display font-bold text-lg uppercase tracking-wider text-white">
+              <Database className="w-4 h-4 text-white shrink-0" />
+              <h3 className="font-display font-bold text-[clamp(0.95rem,3.8vw,1.125rem)] uppercase tracking-wider text-white">
                 Core Engineering Competencies
               </h3>
             </div>
-            <span className="text-xs font-mono text-zinc-500">
+            <span className="text-[11px] sm:text-xs font-mono text-zinc-500">
               PROVEN ACROSS BACKEND, MOBILE & DEVOPS
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs text-zinc-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs text-zinc-300">
             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
               <div className="font-bold text-white mb-1.5 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-white" />

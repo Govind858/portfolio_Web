@@ -75,11 +75,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
         {/* Modal Window */}
         <motion.div
+          data-lenis-prevent
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto bg-zinc-950 border border-white/15 rounded-3xl p-6 sm:p-10 shadow-2xl z-10 text-white"
+          className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-white/15 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl z-10 text-white"
         >
           {/* Header */}
           <div className="flex items-start justify-between gap-4 pb-6 border-b border-white/10">

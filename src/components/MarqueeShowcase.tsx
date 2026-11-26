@@ -123,20 +123,20 @@ export const MarqueeShowcase: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-12 sm:py-16 overflow-hidden border-y border-white/[0.07] bg-zinc-950/70">
+    <section className="relative py-10 sm:py-16 overflow-hidden border-y border-white/[0.07] bg-zinc-950/70">
       {/* Subtle Side Vignette Gradients */}
-      <div className="absolute top-0 bottom-0 left-0 w-24 sm:w-44 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 bottom-0 right-0 w-24 sm:w-44 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 left-0 w-10 sm:w-28 md:w-44 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 right-0 w-10 sm:w-28 md:w-44 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
 
       {/* Row 1: Left to Right Marquee with Uniform Slide Cards */}
       <div className="flex overflow-hidden py-1.5 select-none">
-        <div className="animate-marquee flex items-center gap-4">
+        <div className="animate-marquee flex items-center gap-3 sm:gap-4">
           {[...marqueeItemsRow1, ...marqueeItemsRow1].map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="w-[280px] sm:w-[320px] h-[105px] flex-shrink-0 p-4 rounded-2xl glass-panel border border-white/10 hover:border-white/30 transition-all flex flex-col justify-between cursor-default group"
+                className="w-[250px] sm:w-[300px] md:w-[320px] h-[102px] sm:h-[105px] flex-shrink-0 p-3.5 sm:p-4 rounded-2xl glass-panel border border-white/10 hover:border-white/30 transition-all flex flex-col justify-between cursor-default group"
               >
                 {/* Top Row: Category + Status */}
                 <div className="flex items-center justify-between text-[10px] font-mono">
@@ -167,13 +167,13 @@ export const MarqueeShowcase: React.FC = () => {
 
       {/* Row 2: Right to Left Marquee (Counter Direction) with Uniform Slide Cards */}
       <div className="flex overflow-hidden py-1.5 select-none mt-3">
-        <div className="animate-marquee-reverse flex items-center gap-4">
+        <div className="animate-marquee-reverse flex items-center gap-3 sm:gap-4">
           {[...marqueeItemsRow2, ...marqueeItemsRow2].map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="w-[280px] sm:w-[320px] h-[105px] flex-shrink-0 p-4 rounded-2xl glass-panel border border-white/10 hover:border-white/30 transition-all flex flex-col justify-between cursor-default group"
+                className="w-[250px] sm:w-[300px] md:w-[320px] h-[102px] sm:h-[105px] flex-shrink-0 p-3.5 sm:p-4 rounded-2xl glass-panel border border-white/10 hover:border-white/30 transition-all flex flex-col justify-between cursor-default group"
               >
                 {/* Top Row: Category + Status */}
                 <div className="flex items-center justify-between text-[10px] font-mono">

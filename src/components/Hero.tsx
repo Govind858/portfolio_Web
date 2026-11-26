@@ -42,22 +42,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
   };
 
   return (
-    <section className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-between pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-12 overflow-hidden">
+    <section className="relative min-h-[100svh] flex flex-col justify-between pt-8 md:pt-28 pb-24 md:pb-16 px-4 sm:px-6 lg:px-12 overflow-hidden">
       {/* Background Ambient Monochromatic Light Flares */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[700px] h-[550px] sm:h-[700px] rounded-full bg-gradient-to-b from-white/[0.04] via-zinc-800/[0.02] to-transparent blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[550px] lg:w-[700px] h-[320px] sm:h-[550px] lg:h-[700px] rounded-full bg-gradient-to-b from-white/[0.04] via-zinc-800/[0.02] to-transparent blur-[100px] sm:blur-[120px] pointer-events-none" />
 
       {/* Top HUD: Status Bar & Coordinates */}
-      <div className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-400">
+      <div className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] sm:text-xs font-mono text-zinc-400">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-white/10"
+          className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 px-3.5 py-1.5 rounded-full glass-panel border border-white/10 max-w-full text-center"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
           <span className="text-zinc-200 font-medium">OPEN TO NEW ROLES & COMMISSIONS</span>
-          <span className="text-zinc-500">•</span>
-          <span className="text-zinc-400">MERN / NODE.JS</span>
+          <span className="text-zinc-500 hidden sm:inline">•</span>
+          <span className="text-zinc-400 hidden sm:inline">MERN / NODE.JS</span>
         </motion.div>
 
         <motion.div
@@ -83,10 +83,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mb-3 inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.02] text-xs sm:text-sm font-mono tracking-widest text-zinc-300 uppercase"
+          className="mb-3 inline-flex items-center justify-center gap-2 px-3 sm:px-3.5 py-1 rounded-full border border-white/10 bg-white/[0.02] text-[10px] sm:text-xs md:text-sm font-mono tracking-wider sm:tracking-widest text-zinc-300 uppercase max-w-full"
         >
-          <Terminal className="w-3.5 h-3.5 text-zinc-400" />
-          <span>GOVIND JAYAKUMAR · NODE.JS DEVELOPER</span>
+          <Terminal className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+          <span className="truncate">GOVIND JAYAKUMAR · NODE.JS DEVELOPER</span>
         </motion.div>
 
         {/* Monumental Editorial Headline */}
@@ -94,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display font-extrabold text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight uppercase text-white leading-[1.05] max-w-4xl"
+          className="font-display font-extrabold text-[clamp(1.55rem,6.8vw,5.5rem)] tracking-tight uppercase text-white leading-[1.06] max-w-4xl"
         >
           Engineering <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-600">Scalable</span> Backend Systems.
         </motion.h1>
@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-body text-zinc-400 text-sm sm:text-base md:text-lg max-w-2xl mt-3 sm:mt-4 leading-relaxed"
+          className="font-body text-zinc-400 text-sm sm:text-base md:text-lg max-w-2xl mt-3 sm:mt-4 leading-relaxed px-1"
         >
           Building scalable Node.js architectures, distributed systems, automated Kubernetes container deployments, and cross-platform mobile applications.
         </motion.p>
@@ -114,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
           initial={{ opacity: 0, scale: 0.96, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full"
+          className="w-full min-w-0"
         >
           <HeroTerminal />
         </motion.div>
@@ -124,11 +124,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45 }}
-          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2 sm:mt-4"
+          className="w-full sm:w-auto grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2.5 sm:gap-4 mt-2 sm:mt-4"
         >
           <button
             onClick={scrollToWorks}
-            className="flex items-center gap-2 px-6 sm:px-8 py-3.5 rounded-full bg-white text-black font-mono text-xs sm:text-sm font-bold tracking-wider hover:bg-zinc-200 active:scale-95 transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+            className="col-span-2 sm:col-span-1 flex items-center justify-center gap-2 px-5 sm:px-8 py-3.5 rounded-full bg-white text-black font-mono text-xs sm:text-sm font-bold tracking-wider hover:bg-zinc-200 active:scale-95 transition-all shadow-[0_0_30px_rgba(255,255,255,0.25)]"
           >
             <span>INSPECT PROJECTS</span>
             <ArrowDown className="w-4 h-4" />
@@ -136,23 +136,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
 
           <button
             onClick={scrollToStack}
-            className="flex items-center gap-2 px-5 sm:px-6 py-3.5 rounded-full glass-panel text-zinc-200 font-mono text-xs sm:text-sm tracking-wider hover:text-white hover:border-white/40 active:scale-95 transition-all"
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 rounded-full glass-panel text-zinc-200 font-mono text-xs sm:text-sm tracking-wider hover:text-white hover:border-white/40 active:scale-95 transition-all"
           >
-            <Server className="w-4 h-4 text-zinc-400" />
+            <Server className="w-4 h-4 text-zinc-400 shrink-0" />
             <span>TECH STACK</span>
           </button>
 
           <button
             onClick={onOpenResume}
-            className="flex items-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-white/10 hover:border-white/30 text-zinc-300 hover:text-white font-mono text-xs sm:text-sm tracking-wider active:scale-95 transition-all"
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3.5 rounded-full border border-white/10 hover:border-white/30 text-zinc-300 hover:text-white font-mono text-xs sm:text-sm tracking-wider active:scale-95 transition-all"
           >
-            <FileText className="w-4 h-4 text-zinc-400" />
-            <span>VIEW RESUME</span>
+            <FileText className="w-4 h-4 text-zinc-400 shrink-0" />
+            <span>RESUME</span>
           </button>
 
           <button
             onClick={onOpenContact}
-            className="hidden sm:flex items-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-white/10 hover:border-white/30 text-zinc-400 hover:text-white font-mono text-xs sm:text-sm tracking-wider active:scale-95 transition-all"
+            className="col-span-2 sm:col-span-1 flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 rounded-full border border-white/10 hover:border-white/30 text-zinc-300 hover:text-white font-mono text-xs sm:text-sm tracking-wider active:scale-95 transition-all"
           >
             <span>GET IN TOUCH</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -189,17 +189,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume }) => {
       </div>
 
       {/* Bottom Hero HUD Telemetry */}
-      <div className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/[0.06] text-[11px] font-mono text-zinc-500">
-        <div className="flex items-center gap-4">
+      <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5 md:gap-4 pt-6 mt-6 border-t border-white/[0.06] text-[10px] sm:text-[11px] font-mono text-zinc-500 text-center">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <span className="flex items-center gap-1.5 text-zinc-400">
-            <ShieldCheck className="w-3.5 h-3.5 text-white" />
+            <ShieldCheck className="w-3.5 h-3.5 text-white shrink-0" />
             <span>K8S AUTOSCALING: 2-10 REPLICAS</span>
           </span>
-          <span>•</span>
+          <span className="hidden sm:inline">•</span>
           <span>NGINX: 1,024 WORKER CONNS</span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <span>REDIS & BULLMQ DECOUPLED QUEUES</span>
           <span className="hidden sm:inline">•</span>
           <span className="hidden sm:inline">BLE ESC/POS BUFFER THROTTLING</span>

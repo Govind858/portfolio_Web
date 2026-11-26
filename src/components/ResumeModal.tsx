@@ -45,11 +45,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
 
         {/* Modal Window */}
         <motion.div
+          data-lenis-prevent
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-zinc-950 border border-white/20 rounded-3xl p-6 sm:p-10 shadow-2xl z-10 text-white"
+          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-white/20 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl z-10 text-white"
         >
           {/* Action Header */}
           <div className="flex items-center justify-between gap-4 pb-6 border-b border-white/10">
@@ -101,12 +102,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
                 Node.js Developer
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-mono text-zinc-400 mt-4">
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs font-mono text-zinc-400 mt-4">
                 <span className="flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-zinc-400" />
                   <span>Kerala, India</span>
                 </span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <a
                   href={`tel:${SOCIAL_LINKS.phone.replace(/\s+/g, '')}`}
                   className="flex items-center gap-1 hover:text-white transition-colors"
@@ -114,15 +115,15 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
                   <Phone className="w-3.5 h-3.5 text-zinc-400" />
                   <span>+91 9037920297</span>
                 </a>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <a
                   href={`mailto:${SOCIAL_LINKS.email}`}
-                  className="flex items-center gap-1 hover:text-white transition-colors"
+                  className="flex items-center gap-1 hover:text-white transition-colors break-all sm:break-normal"
                 >
-                  <Mail className="w-3.5 h-3.5 text-zinc-400" />
+                  <Mail className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                   <span>{SOCIAL_LINKS.email}</span>
                 </a>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <a
                   href={SOCIAL_LINKS.github}
                   target="_blank"
@@ -132,7 +133,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
                   <GithubIcon className="w-3.5 h-3.5 text-zinc-300" />
                   <span>github.com/Govind858</span>
                 </a>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <a
                   href={SOCIAL_LINKS.linkedin}
                   target="_blank"

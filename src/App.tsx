@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLenis } from './hooks/useLenis';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -10,94 +10,151 @@ import { TechStackSection } from './components/TechStackSection';
 import { Footer } from './components/Footer';
 import { ContactModal } from './components/ContactModal';
 import { ResumeModal } from './components/ResumeModal';
+import { ProjectDetailPage } from './components/ProjectDetailPage';
 import { CommandPalette } from './components/CommandPalette';
 import { CustomCursor } from './components/CustomCursor';
-import { ProjectDetailPage } from './components/ProjectDetailPage';
-import { projects } from './data/projects';
+import { projects, type Project } from './data/projects';
 
-function getProjectIdFromHash(): string | null {
-  const hash = window.location.hash;
-  const match = hash.match(/^#\/project\/([^/?#]+)/);
-  if (match) {
-    const found = projects.find((p) => p.id === match[1]);
-    return found ? found.id : null;
+const DEFAULT_TITLE = 'Govind Jayakumar ✦ Node.js & MERN Stack Developer';
+
+function getProjectFromUrl(): Project | null {
+  if (typeof window === 'undefined') return null;
+
+  const hashMatch = window.location.hash.match(/^#\/?projects\/([^/?#]+)/);
+  if (hashMatch) {
+    return projects.find((p) => p.id === hashMatch[1]) ?? null;
   }
+
+  const pathMatch = window.location.pathname.match(/\/projects\/([^/?#]+)/);
+  if (pathMatch) {
+    return projects.find((p) => p.id === pathMatch[1]) ?? null;
+  }
+
   return null;
 }
 
-export function App() {
-  // Initialize Lenis smooth scroll for natural inertia scrolling across all pages
-  useLenis();
+function scrollPageTo(target: number | string, immediate = false) {
+  const lenis = (window as unknown as {
+    lenis?: { scrollTo: (target: number | string | HTMLElement, options?: { immediate?: boolean }) => void };
+  }).lenis;
 
-  // Route state derived from URL hash
-  const [currentProjectId, setCurrentProjectId] = useState<string | null>(getProjectIdFromHash());
+  if (typeof target === 'number') {
+    if (lenis) {
+      lenis.scrollTo(target, { immediate });
+    } else {
+      window.scrollTo({ top: target, behavior: immediate ? 'auto' : 'smooth' });
+    }
+    return;
+  }
+
+  const el = document.getElementById(target);
+  if (!el) return;
+
+  if (lenis) {
+    lenis.scrollTo(el, { immediate });
+  } else {
+    el.scrollIntoView({ behavior: immediate ? 'auto' : 'smooth' });
+  }
+}
+
+export function App() {
+  // Initialize Lenis smooth scroll
+  useLenis();
 
   // Modal states
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(() => getProjectFromUrl());
 
-  // Synchronize route with browser hash and history (Supports Back/Forward browser buttons)
+  // Sync browser back/forward & hash changes
   useEffect(() => {
-    const handleHashChange = () => {
-      const pid = getProjectIdFromHash();
-      setCurrentProjectId(pid);
-
-      if (!pid && window.location.hash === '#projects') {
-        setTimeout(() => {
-          const el = document.getElementById('projects');
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
+    const syncFromUrl = () => {
+      const matched = getProjectFromUrl();
+      setSelectedProject(matched);
+      if (matched) {
+        requestAnimationFrame(() => scrollPageTo(0, true));
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', syncFromUrl);
+    window.addEventListener('hashchange', syncFromUrl);
+    return () => {
+      window.removeEventListener('popstate', syncFromUrl);
+      window.removeEventListener('hashchange', syncFromUrl);
+    };
   }, []);
 
-  const navigateToProject = (id: string) => {
-    window.location.hash = `#/project/${id}`;
+  // Update document title when switching pages
+  useEffect(() => {
+    document.title = selectedProject
+      ? `${selectedProject.title} — Case Study | Govind Jayakumar`
+      : DEFAULT_TITLE;
+  }, [selectedProject]);
+
+  const handleSelectProject = (project: Project) => {
+    const targetHash = `#/projects/${project.id}`;
+    if (window.location.hash !== targetHash) {
+      window.history.pushState({ projectId: project.id }, '', targetHash);
+    }
+    setSelectedProject(project);
+    requestAnimationFrame(() => scrollPageTo(0, true));
   };
 
-  const handleBackToPortfolio = () => {
-    window.location.hash = '#projects';
-    setCurrentProjectId(null);
-    setTimeout(() => {
-      const el = document.getElementById('projects');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 150);
+  const handleNavigateSection = (sectionId: string) => {
+    const wasOnProjectPage = selectedProject !== null;
+
+    if (wasOnProjectPage) {
+      const baseUrl = window.location.pathname.includes('/projects/')
+        ? '/'
+        : `${window.location.pathname}${window.location.search}`;
+      window.history.pushState(null, '', baseUrl);
+      setSelectedProject(null);
+
+      setTimeout(() => {
+        if (sectionId === 'top') {
+          scrollPageTo(0, false);
+        } else {
+          scrollPageTo(sectionId, false);
+        }
+      }, 60);
+      return;
+    }
+
+    if (sectionId === 'top') {
+      scrollPageTo(0, false);
+    } else {
+      scrollPageTo(sectionId, false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#F3F4F6] relative bg-grain selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-[#050505] text-[#F3F4F6] relative bg-grain selection:bg-white selection:text-black overflow-x-clip">
       {/* Magnetic Smooth Cursor (Desktop) */}
       <CustomCursor />
 
-      {/* RENDER DEDICATED FULL-PAGE CASE STUDY IF PROJECT ROUTE ACTIVE */}
-      {currentProjectId ? (
-        <ProjectDetailPage
-          projectId={currentProjectId}
-          onBack={handleBackToPortfolio}
+      {/* Floating Navbar (Home Page Only — ProjectDetailPage has its own dedicated top header) */}
+      {!selectedProject && (
+        <Navbar
           onOpenContact={() => setIsContactOpen(true)}
+          onOpenCommand={() => setIsCommandOpen(true)}
           onOpenResume={() => setIsResumeOpen(true)}
-          onSelectProject={(id) => navigateToProject(id)}
+          isProjectPage={false}
+          onNavigateSection={handleNavigateSection}
         />
-      ) : (
-        /* RENDER MAIN HOMEPAGE SECTIONS */
-        <>
-          {/* Floating Navbar (Top on Desktop, Bottom Thumb-Zone on Mobile) */}
-          <Navbar
-            onOpenContact={() => setIsContactOpen(true)}
-            onOpenCommand={() => setIsCommandOpen(true)}
-            onOpenResume={() => setIsResumeOpen(true)}
-          />
+      )}
 
-          {/* Main Content Sections */}
-          <main>
+      {/* Main Content Sections or Dedicated Project Case Study Page */}
+      <main>
+        {selectedProject ? (
+          <ProjectDetailPage
+            project={selectedProject}
+            onBack={() => handleNavigateSection('projects')}
+            onSelectProject={handleSelectProject}
+            onOpenContact={() => setIsContactOpen(true)}
+          />
+        ) : (
+          <>
             {/* 01: Hero with 3D Centerpiece */}
             <Hero
               onOpenContact={() => setIsContactOpen(true)}
@@ -110,25 +167,24 @@ export function App() {
             {/* 03: Bento Grid About & Engineering Philosophy */}
             <BentoAbout />
 
-            {/* 04: Professional Experience (ByteBoot Techno Solutions & Education) */}
+            {/* 04: Professional Experience (ByteBoot Techno Solutions) */}
             <Experience />
 
             {/* 05: Production Projects (BookMyCuts, Coffy Byte, OlaCars) */}
-            <Projects
-              onSelectProject={(project) => navigateToProject(project.id)}
-            />
+            <Projects onSelectProject={handleSelectProject} />
 
             {/* 06: Technical Stack (High-Contrast Inverted White Card Section) */}
             <TechStackSection />
-          </main>
+          </>
+        )}
+      </main>
 
-          {/* 07: Editorial Footer */}
-          <Footer
-            onOpenContact={() => setIsContactOpen(true)}
-            onOpenResume={() => setIsResumeOpen(true)}
-          />
-        </>
-      )}
+      {/* 07: Editorial Footer */}
+      <Footer
+        onOpenContact={() => setIsContactOpen(true)}
+        onOpenResume={() => setIsResumeOpen(true)}
+        onNavigateSection={handleNavigateSection}
+      />
 
       {/* Direct Contact Modal */}
       <ContactModal
@@ -149,6 +205,8 @@ export function App() {
         onClose={() => setIsCommandOpen(false)}
         onOpenContact={() => setIsContactOpen(true)}
         onOpenResume={() => setIsResumeOpen(true)}
+        onSelectProject={handleSelectProject}
+        onNavigateSection={handleNavigateSection}
       />
     </div>
   );

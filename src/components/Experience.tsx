@@ -5,15 +5,15 @@ import { experiences, education } from '../data/experience';
 
 export const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+    <section id="experience" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 pb-6 border-b border-white/10">
-        <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-2 mb-2">
-            <Briefcase className="w-3.5 h-3.5 text-white" />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-14 lg:mb-16 pb-6 border-b border-white/10">
+        <div className="min-w-0">
+          <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-400 flex items-center gap-2 mb-2">
+            <Briefcase className="w-3.5 h-3.5 text-white shrink-0" />
             <span>02 / PROFESSIONAL EXPERIENCE</span>
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl uppercase tracking-tight text-white">
+          <h2 className="font-display font-bold text-[clamp(1.35rem,5.5vw,3rem)] uppercase tracking-tight text-white leading-[1.08]">
             Engineering Track Record.
           </h2>
         </div>
@@ -23,7 +23,7 @@ export const Experience: React.FC = () => {
       </div>
 
       {/* Experience Timeline */}
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         {experiences.map((exp) => (
           <motion.div
             key={exp.id}
@@ -31,7 +31,7 @@ export const Experience: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-3xl glass-panel p-6 sm:p-10 border border-white/10 relative overflow-hidden"
+            className="rounded-3xl glass-panel p-5 sm:p-8 lg:p-10 border border-white/10 relative overflow-hidden"
           >
             {/* Ambient Radial Accent */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl pointer-events-none" />
@@ -43,7 +43,7 @@ export const Experience: React.FC = () => {
                   <Layers className="w-3.5 h-3.5" />
                   <span>{exp.type}</span>
                 </div>
-                <h3 className="font-display font-bold text-2xl sm:text-4xl text-white uppercase tracking-tight">
+                <h3 className="font-display font-bold text-[clamp(1.35rem,5.5vw,2.25rem)] text-white uppercase tracking-tight leading-tight">
                   {exp.role}
                 </h3>
                 <div className="text-sm sm:text-base font-mono text-zinc-300 font-semibold mt-1">
@@ -113,18 +113,18 @@ export const Experience: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="rounded-3xl glass-panel p-6 sm:p-8 border border-white/10 relative overflow-hidden"
+            className="rounded-3xl glass-panel p-5 sm:p-8 border border-white/10 relative overflow-hidden"
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white mt-1">
-                  <GraduationCap className="w-6 h-6" />
+              <div className="flex items-start gap-3.5 sm:gap-4 min-w-0">
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white/5 border border-white/10 text-white mt-1 shrink-0">
+                  <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-white/10 text-white font-mono text-[11px] font-bold uppercase mb-1">
                     Formal Education
                   </div>
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white uppercase tracking-tight">
+                  <h3 className="font-display font-bold text-[clamp(1.05rem,4.4vw,1.5rem)] text-white uppercase tracking-tight leading-snug">
                     {edu.degree}
                   </h3>
                   <div className="text-sm font-mono text-zinc-400 mt-1">

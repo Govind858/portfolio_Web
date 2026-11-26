@@ -23,13 +23,13 @@ export const ServicesInverted: React.FC<ServicesInvertedProps> = ({ onOpenPricin
         <div className="absolute top-0 right-0 w-96 h-96 bg-zinc-100 rounded-full blur-3xl pointer-events-none -z-0" />
 
         {/* Section Header */}
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 sm:pb-14 border-b border-zinc-200">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-xs font-mono tracking-widest uppercase mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 sm:pb-12 lg:pb-14 border-b border-zinc-200">
+          <div className="min-w-0">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-[11px] sm:text-xs font-mono tracking-widest uppercase mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
               <span>02 / SERVICES & CAPABILITIES</span>
             </div>
-            <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-black leading-none">
+            <h2 className="font-display font-extrabold text-[clamp(1.3rem,5.4vw,3.75rem)] uppercase tracking-tight text-black leading-[1.08]">
               Capabilities Built For Conversion.
             </h2>
           </div>
@@ -58,12 +58,12 @@ export const ServicesInverted: React.FC<ServicesInvertedProps> = ({ onOpenPricin
                   onClick={() => toggleAccordion(index)}
                   className="w-full flex items-start sm:items-center justify-between text-left gap-4"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
-                    <span className="font-mono text-sm sm:text-base font-bold text-zinc-400 group-hover:text-black transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-8 min-w-0 flex-1">
+                    <span className="font-mono text-xs sm:text-base font-bold text-zinc-400 group-hover:text-black transition-colors shrink-0">
                       {service.number}
                     </span>
-                    <div>
-                      <h3 className="font-display font-bold text-xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-black group-hover:translate-x-1 transition-transform">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-display font-bold text-[clamp(1.05rem,4.4vw,2.25rem)] uppercase tracking-tight text-black leading-tight group-hover:translate-x-1 transition-transform">
                         {service.title}
                       </h3>
                       <p className="font-mono text-xs text-zinc-500 mt-1 uppercase tracking-wider">

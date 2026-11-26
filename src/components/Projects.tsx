@@ -18,15 +18,15 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
     : projects.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+    <section id="projects" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 pb-8 border-b border-white/10">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel text-xs font-mono tracking-widest text-zinc-300 uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14 lg:mb-16 pb-8 border-b border-white/10">
+        <div className="min-w-0">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel text-[11px] sm:text-xs font-mono tracking-widest text-zinc-300 uppercase mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-white shrink-0" />
             <span>03 / FEATURED SYSTEMS & APPS</span>
           </div>
-          <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-white leading-none">
+          <h2 className="font-display font-extrabold text-[clamp(1.25rem,5.2vw,3.75rem)] uppercase tracking-tight text-white leading-[1.08]">
             Production Implementations.
           </h2>
         </div>
@@ -38,7 +38,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
+              className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-mono transition-all ${
                 activeFilter === cat
                   ? 'bg-white text-black font-semibold shadow-md'
                   : 'bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 border border-white/5'
@@ -51,7 +51,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       </div>
 
       {/* Projects Grid */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
         <AnimatePresence>
           {filteredProjects.map((project) => (
             <motion.div
@@ -79,25 +79,25 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
                 {/* Top Badge: Number, Play Store & Category */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                  <span className="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 font-mono text-xs font-bold text-white">
+                <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 flex flex-wrap items-center justify-between gap-1.5 pointer-events-none">
+                  <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 font-mono text-[11px] sm:text-xs font-bold text-white">
                     {project.number}
                   </span>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     {project.playstoreUrl && (
-                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-black font-mono text-[10px] font-bold flex items-center gap-1 shadow-md">
+                      <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-emerald-500/90 text-black font-mono text-[10px] font-bold flex items-center gap-1 shadow-md">
                         <PlayStoreIcon className="w-3 h-3 fill-current" />
                         <span>PLAY STORE</span>
                       </span>
                     )}
-                    <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 font-mono text-xs text-zinc-300">
+                    <span className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 font-mono text-[10px] sm:text-xs text-zinc-300">
                       {project.category}
                     </span>
                   </div>
                 </div>
 
                 {/* Hover Reveal Floating View Pill */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute inset-0 hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                   <div className="px-4 py-2 rounded-full bg-white text-black font-mono text-xs font-bold flex items-center gap-2 shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform">
                     <Eye className="w-3.5 h-3.5" />
                     <span>INSPECT ARCHITECTURE</span>
@@ -105,21 +105,21 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                 </div>
 
                 {/* Bottom Thumbnail Overlay Info */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-zinc-300 pointer-events-none">
-                  <span>{project.client}</span>
-                  <span>{project.year}</span>
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between gap-2 text-[11px] sm:text-xs font-mono text-zinc-300 pointer-events-none">
+                  <span className="truncate">{project.client}</span>
+                  <span className="shrink-0">{project.year}</span>
                 </div>
               </div>
 
               {/* Card Body & Details */}
-              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1">
+              <div className="p-5 sm:p-7 flex flex-col justify-between flex-1 min-w-0">
                 <div>
                   <h3 
                     onClick={() => onSelectProject(project)}
-                    className="font-display font-bold text-xl sm:text-2xl text-white uppercase tracking-tight group-hover:text-zinc-200 transition-colors cursor-pointer flex items-center justify-between"
+                    className="font-display font-bold text-[clamp(1.1rem,4.6vw,1.5rem)] text-white uppercase tracking-tight group-hover:text-zinc-200 transition-colors cursor-pointer flex items-center justify-between gap-2"
                   >
-                    <span>{project.title}</span>
-                    <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                    <span className="min-w-0">{project.title}</span>
+                    <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all shrink-0" />
                   </h3>
 
                   <p className="font-body text-zinc-400 text-xs sm:text-sm mt-3 leading-relaxed line-clamp-3">
@@ -141,40 +141,43 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                   </div>
                 </div>
 
-                {/* Action Buttons & Tech Pills */}
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-                  <div className="flex flex-wrap gap-1">
-                    {project.techStack.slice(0, 2).map((item, i) => (
+                {/* Tech Pills & Dedicated Separate Action Buttons */}
+                <div className="mt-6 pt-4 border-t border-white/10 space-y-4">
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.techStack.slice(0, 3).map((item, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded-full bg-white/5 border border-white/5 text-[10px] font-mono text-zinc-400"
+                        className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-400"
                       >
                         {item}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className={`grid gap-2.5 ${project.playstoreUrl ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'}`}>
+                    <button
+                      onClick={() => onSelectProject(project)}
+                      className="w-full px-4 py-2.5 rounded-xl bg-white text-black hover:bg-zinc-200 active:scale-[0.98] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md"
+                    >
+                      <Terminal className="w-3.5 h-3.5" />
+                      <span>CASE STUDY</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+
                     {project.playstoreUrl && (
                       <a
                         href={project.playstoreUrl}
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1 font-semibold"
-                        title="Open on Google Play"
+                        className="w-full px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 border border-emerald-500/40 text-emerald-400 hover:text-black active:scale-[0.98] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.12)]"
+                        title="Download BookMyCuts on Google Play Store"
                       >
-                        <PlayStoreIcon className="w-3 h-3 fill-current" />
-                        <span>Play Store ↗</span>
+                        <PlayStoreIcon className="w-3.5 h-3.5 fill-current" />
+                        <span>PLAY STORE</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
                       </a>
                     )}
-                    <button
-                      onClick={() => onSelectProject(project)}
-                      className="text-xs font-mono text-white underline underline-offset-4 hover:text-zinc-300 transition-colors flex items-center gap-1"
-                    >
-                      <Terminal className="w-3 h-3" />
-                      <span>Deep Specs →</span>
-                    </button>
                   </div>
                 </div>
               </div>

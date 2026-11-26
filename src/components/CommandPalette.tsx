@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Briefcase, Terminal, User, Mail, Copy, FileText, ArrowRight, X, Phone, Cpu } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, PlayStoreIcon } from './SocialIcons';
 import { SOCIAL_LINKS } from '../data/social';
+import { projects, type Project } from '../data/projects';
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenContact: () => void;
   onOpenResume: () => void;
+  onSelectProject?: (project: Project) => void;
+  onNavigateSection?: (sectionId: string) => void;
 }
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
@@ -16,6 +19,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   onClose,
   onOpenContact,
   onOpenResume,
+  onSelectProject,
+  onNavigateSection,
 }) => {
   const [query, setQuery] = useState('');
 
@@ -37,6 +42,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const scrollTo = (id: string) => {
     onClose();
+    if (onNavigateSection) {
+      onNavigateSection(id);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
@@ -54,38 +63,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   };
 
   const actions = [
+    ...projects.map((project) => ({
+      title: `Case Study: ${project.title} (${project.category})`,
+      category: 'Project Deep Dives',
+      icon: Terminal,
+      handler: () => {
+        onClose();
+        onSelectProject?.(project);
+      },
+    })),
     {
       title: 'Inspect Featured Production Projects',
       category: 'Navigation',
       icon: Terminal,
       handler: () => scrollTo('projects'),
-    },
-    {
-      title: 'Case Study: BookMyCuts Platform (Play Store & K8s)',
-      category: 'Case Studies',
-      icon: Terminal,
-      handler: () => {
-        window.location.hash = '#/project/bookmycuts';
-        onClose();
-      },
-    },
-    {
-      title: 'Case Study: Coffy Byte POS (React Native & BLE Hex)',
-      category: 'Case Studies',
-      icon: Terminal,
-      handler: () => {
-        window.location.hash = '#/project/coffy-byte';
-        onClose();
-      },
-    },
-    {
-      title: 'Case Study: OlaCars Fleet Portal (Enterprise React 19)',
-      category: 'Case Studies',
-      icon: Terminal,
-      handler: () => {
-        window.location.hash = '#/project/olacars-portal';
-        onClose();
-      },
     },
     {
       title: 'View BookMyCuts on Google Play Store',
@@ -171,7 +162,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 sm:px-6">
+      <div className="fixed inset-0 z-50 flex items-start justify-center pt-10 sm:pt-20 px-3 sm:px-6">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -183,11 +174,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         {/* Modal Window */}
         <motion.div
+          data-lenis-prevent
           initial={{ opacity: 0, scale: 0.95, y: -20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-xl bg-zinc-950 border border-white/20 rounded-2xl p-4 shadow-2xl z-10 text-white overflow-hidden"
+          className="relative w-full max-w-xl bg-zinc-950 border border-white/20 rounded-2xl p-3 sm:p-4 shadow-2xl z-10 text-white overflow-hidden"
         >
           {/* Search Input */}
           <div className="flex items-center gap-3 px-3 py-2 border-b border-white/10">
@@ -209,7 +201,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           {/* Action List */}
-          <div className="mt-3 max-h-80 overflow-y-auto space-y-1">
+          <div className="mt-3 max-h-[60vh] sm:max-h-80 overflow-y-auto space-y-1">
             {filtered.length === 0 ? (
               <div className="py-8 text-center text-xs font-mono text-zinc-500">
                 No commands matching "{query}"

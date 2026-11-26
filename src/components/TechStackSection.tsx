@@ -21,26 +21,26 @@ export const TechStackSection: React.FC = () => {
   };
 
   return (
-    <section id="tech-stack" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+    <section id="tech-stack" className="py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
       {/* HIGH-CONTRAST INVERTED SURGICAL WHITE CONTAINER (Award-Winning Aesthetic) */}
-      <div className="bg-white text-black rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-12 lg:p-16 shadow-[0_25px_60px_rgba(255,255,255,0.06)] relative overflow-hidden transition-all">
+      <div className="bg-white text-black rounded-3xl sm:rounded-[2.5rem] lg:rounded-[3rem] p-5 sm:p-10 lg:p-16 shadow-[0_25px_60px_rgba(255,255,255,0.06)] relative overflow-hidden transition-all">
         
         {/* Subtle Decorative Ambient Lighting */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-zinc-100 rounded-full blur-3xl pointer-events-none -z-0" />
 
         {/* Section Header */}
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 sm:pb-14 border-b border-zinc-200">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-xs font-mono tracking-widest uppercase mb-4">
-              <Cpu className="w-3.5 h-3.5 text-zinc-300" />
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 sm:pb-12 lg:pb-14 border-b border-zinc-200">
+          <div className="min-w-0">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-[11px] sm:text-xs font-mono tracking-widest uppercase mb-4">
+              <Cpu className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
               <span>04 / TECHNICAL SKILLS & STACK</span>
             </div>
-            <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-black leading-none">
+            <h2 className="font-display font-extrabold text-[clamp(1.3rem,5.4vw,3.75rem)] uppercase tracking-tight text-black leading-[1.08]">
               Engineering Disciplines.
             </h2>
           </div>
 
-          <div className="max-w-md">
+          <div className="max-w-md min-w-0">
             <p className="font-body text-zinc-600 text-sm sm:text-base leading-relaxed">
               Full MERN and DevOps capabilities. Every layer of the system is architected for zero dropped requests, optimal container density, and deterministic performance.
             </p>
@@ -53,23 +53,23 @@ export const TechStackSection: React.FC = () => {
             const isOpen = expandedIndex === index;
             const CategoryIcon = getCategoryIcon(index);
             return (
-              <div key={index} className="py-6 sm:py-8 group">
+              <div key={index} className="py-5 sm:py-8 group">
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-start sm:items-center justify-between text-left gap-4"
+                  className="w-full flex items-start sm:items-center justify-between text-left gap-3 sm:gap-4"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8">
-                    <span className="font-mono text-sm sm:text-base font-bold text-zinc-400 group-hover:text-black transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-8 min-w-0 flex-1">
+                    <span className="font-mono text-xs sm:text-base font-bold text-zinc-400 group-hover:text-black transition-colors shrink-0">
                       0{index + 1}
                     </span>
-                    <div>
-                      <div className="flex items-center gap-3">
-                        <CategoryIcon className="w-5 h-5 text-zinc-600 group-hover:text-black transition-colors" />
-                        <h3 className="font-display font-bold text-xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-black group-hover:translate-x-1 transition-transform">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 min-w-0">
+                        <CategoryIcon className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-600 group-hover:text-black transition-colors shrink-0 mt-1 sm:mt-0" />
+                        <h3 className="font-display font-bold text-[clamp(1.05rem,4.4vw,2.25rem)] uppercase tracking-tight text-black leading-tight group-hover:translate-x-1 transition-transform min-w-0">
                           {category.title}
                         </h3>
                       </div>
-                      <p className="font-mono text-xs text-zinc-500 mt-1 uppercase tracking-wider">
+                      <p className="font-mono text-[11px] sm:text-xs text-zinc-500 mt-1 uppercase tracking-wider">
                         {category.subtitle}
                       </p>
                     </div>
@@ -97,11 +97,11 @@ export const TechStackSection: React.FC = () => {
                             className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200/80 hover:border-black/30 transition-all flex flex-col justify-between"
                           >
                             <div>
-                              <div className="flex items-center justify-between mb-2">
+                              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                                 <h4 className="font-display font-bold text-base sm:text-lg text-black uppercase">
                                   {skill.name}
                                 </h4>
-                                <span className="px-2 py-0.5 rounded-full bg-zinc-200 text-black font-mono text-[10px] font-semibold">
+                                <span className="px-2 py-0.5 rounded-full bg-zinc-200 text-black font-mono text-[10px] font-semibold shrink-0">
                                   {skill.level}
                                 </span>
                               </div>
